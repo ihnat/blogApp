@@ -11,6 +11,6 @@ export default (
   <Route path="/" component={App}>
     <IndexRoute component={PostList} />
     <Route path="create-post" component={CreatePost} />
-    <Route path="post" component={Post} />
+    <Route path="post/:id" component={Post} />
   </Route>
 );

@@ -3,6 +3,8 @@ import { combineReducers } from 'redux';
 import ReducerPosts from './reducer_posts';
 import {reducer as formReducer} from 'redux-form';
 
+debugger;
+console.log('reducer index')
 const rootReducer = combineReducers({
   posts: ReducerPosts,
   form: formReducer

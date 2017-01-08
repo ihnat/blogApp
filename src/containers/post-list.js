@@ -6,16 +6,19 @@ import { Link } from 'react-router';
 
 class PostList extends Component {
   componentWillMount() {
-    console.log(this.props.fetchPosts());
+    debugger;
+    this.props.fetchPosts();
+    console.log("componentWillMount: " + this.props.posts);
 
   }
   renderPosts() {
-    return [{title: 'Some titles', content: 'Content Content Content Content Content'}].map((postData) => {
+    console.log("renderPosts array: ", this.props.posts);
+    return this.props.posts.map((postData) => {
       return (
-        <div key={postData.title}>
-          <h2>{postData.title}</h2>
-          <p>{postData.content}</p>
-        </div>
+        <li className="list-group-item" key={postData.id}>
+          <span className="pull-xs-right">{postData.categories}</span>
+          <strong>{postData.title}</strong>
+        </li>
       )
     });
   }
@@ -25,16 +28,21 @@ class PostList extends Component {
         <div className="text-xs-right">
           <Link to="/create-post" className="btn btn-primary">Create new post</Link>
         </div>
-        <div>
+        <ul>
           {this.renderPosts()}
-        </div>
+        </ul>
       </div>
     );
   }
 }
 
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ fetchPosts }, dispatch);
+function mapStateToProps(state) {
+  debugger;
+  return { posts: state.posts.all };
 }
+// function mapDispatchToProps(dispatch) {
+//   return bindActionCreators({ fetchPosts }, dispatch);
+// }
 
-export default connect(null, mapDispatchToProps)(PostList);
+
+export default connect(mapStateToProps, { fetchPosts })(PostList);
