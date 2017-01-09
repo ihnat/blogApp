@@ -6,7 +6,6 @@ import { Link } from 'react-router';
 
 class PostList extends Component {
   componentWillMount() {
-    debugger;
     this.props.fetchPosts();
     console.log("componentWillMount: " + this.props.posts);
 
@@ -16,8 +15,8 @@ class PostList extends Component {
     return this.props.posts.map((postData) => {
       return (
         <li className="list-group-item" key={postData.id}>
+          <Link to={`/post/${postData.id}`}>{postData.title}</Link>
           <span className="pull-xs-right">{postData.categories}</span>
-          <strong>{postData.title}</strong>
         </li>
       )
     });
@@ -37,7 +36,6 @@ class PostList extends Component {
 }
 
 function mapStateToProps(state) {
-  debugger;
   return { posts: state.posts.all };
 }
 // function mapDispatchToProps(dispatch) {
